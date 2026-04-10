@@ -5,10 +5,10 @@ import { fileURLToPath } from "url";
 import { Client } from "@notionhq/client";
 import dotenv from "dotenv";
 
-dotenv.config();
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 async function startServer() {
   const app = express();
@@ -76,6 +76,7 @@ async function startServer() {
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
+      root: __dirname,
       server: { middlewareMode: true },
       appType: "spa",
     });

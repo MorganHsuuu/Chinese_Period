@@ -55,6 +55,11 @@ export default function App() {
   }, []);
 
   const handleStartRitual = async () => {
+    if (!process.env.GEMINI_API_KEY) {
+      setInsight("時光流轉，順應自然即是智慧。目前無法取得詳細指引（未設定 API Key），請靜心感受當下。");
+      setIsInitialized(true);
+      return;
+    }
     setIsLoading(true);
     try {
       const prompt = `
@@ -85,6 +90,7 @@ export default function App() {
       
       const result = response.text || "時光流轉，順應自然即是智慧。目前無法取得詳細指引，請靜心感受當下。";
       setInsight(result);
+      setIsInitialized(true);
       
       // Save to history
       const newRecord = {
@@ -115,6 +121,8 @@ export default function App() {
       setIsInitialized(true);
     } catch (error) {
       console.error(error);
+      setInsight("時光流轉，順應自然即是智慧。目前無法取得詳細指引，請靜心感受當下。");
+      setIsInitialized(true);
     } finally {
       setIsLoading(false);
     }
