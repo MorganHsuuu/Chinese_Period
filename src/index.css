@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+@theme {
+  --font-serif: "Noto Serif TC", serif;
+  --font-sans: "Noto Sans TC", sans-serif;
+  --color-paper: #f5f5f0;
+  --color-ink: #2c2c2c;
+  --color-accent: #8b4513;
+  
+  /* Five Elements Colors */
+  --color-wood: #2d5a27;
+  --color-fire: #b22222;
+  --color-earth: #8b7355;
+  --color-metal: #708090;
+  --color-water: #1a3a6d;
+}
+
+.bg-wood { background-color: var(--color-wood); }
+.bg-fire { background-color: var(--color-fire); }
+.bg-earth { background-color: var(--color-earth); }
+.bg-metal { background-color: var(--color-metal); }
+.bg-water { background-color: var(--color-water); }
+
+.text-wood { color: var(--color-wood); }
+.text-fire { color: var(--color-fire); }
+.text-earth { color: var(--color-earth); }
+.text-metal { color: var(--color-metal); }
+.text-water { color: var(--color-water); }
+
+.border-wood { border-color: var(--color-wood); }
+.border-fire { border-color: var(--color-fire); }
+.border-earth { border-color: var(--color-earth); }
+.border-metal { border-color: var(--color-metal); }
+.border-water { border-color: var(--color-water); }
+
+body {
+  @apply bg-paper text-ink font-sans;
+}
+
+.serif {
+  @apply font-serif;
+}
+
+.glass {
+  @apply bg-white/40 backdrop-blur-md border border-white/20;
+}
+
+/* Custom animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+
+
