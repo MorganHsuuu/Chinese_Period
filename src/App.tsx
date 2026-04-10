@@ -107,11 +107,14 @@ export default function App() {
         await fetch('/api/notion/log', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            time: newRecord.time, 
-            meridian: newRecord.meridian, 
+          body: JSON.stringify({
+            time: newRecord.time,
+            meridian: lunarInfo.meridian.name,
             feeling: newRecord.feeling,
-            insight: result
+            fiveElements: lunarInfo.fiveElements,
+            acupoint: lunarInfo.meridian.acupoint,
+            qiAdvice: lunarInfo.qiAdvice,
+            timeGanZhi: lunarInfo.timeGanZhi,
           }),
         });
       } catch (notionError) {

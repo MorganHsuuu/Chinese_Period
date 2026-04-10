@@ -22,7 +22,7 @@ async function startServer() {
 
   // API Routes
   app.post("/api/notion/log", async (req, res) => {
-    const { time, meridian, feeling, insight } = req.body;
+    const { time, meridian, feeling, fiveElements, acupoint, qiAdvice, timeGanZhi } = req.body;
 
     if (!process.env.NOTION_API_KEY) {
       return res.status(400).json({ error: "尚未設定 Notion API Key" });
@@ -32,7 +32,7 @@ async function startServer() {
       await notion.pages.create({
         parent: { database_id: databaseId },
         properties: {
-          "時間": {
+          "timimg": {
             title: [
               {
                 text: {
@@ -41,28 +41,23 @@ async function startServer() {
               },
             ],
           },
-          "經絡": {
-            rich_text: [
-              {
-                text: {
-                  content: meridian,
-                },
-              },
-            ],
+          "Meridian": {
+            rich_text: [{ text: { content: meridian || "" } }],
           },
-          "感受": {
-            select: {
-              name: feeling,
-            },
+          "feeling": {
+            rich_text: [{ text: { content: feeling || "" } }],
           },
-          "生活玄機": {
-            rich_text: [
-              {
-                text: {
-                  content: insight.substring(0, 2000), // Notion limit
-                },
-              },
-            ],
+          "Five Elements": {
+            rich_text: [{ text: { content: fiveElements || "" } }],
+          },
+          "Recommended Acupoint": {
+            rich_text: [{ text: { content: acupoint || "" } }],
+          },
+          "Suggested Action": {
+            rich_text: [{ text: { content: (qiAdvice || "").substring(0, 2000) } }],
+          },
+          "Two-Hour Period": {
+            rich_text: [{ text: { content: timeGanZhi || "" } }],
           },
         },
       });
